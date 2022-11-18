@@ -47,7 +47,23 @@ const Navbar = () => {
           minW="max-content"
           padding={navPadding}
         >
-          Video
+          Fight
+        </Heading>
+        <Heading
+          as={RouterLink}
+          to={"/training"}
+          minW="max-content"
+          padding={navPadding}
+        >
+          Training
+        </Heading>
+        <Heading
+          as={RouterLink}
+          to={"/browsevideo"}
+          minW="max-content"
+          padding={navPadding}
+        >
+          All Videos
         </Heading>
       </Flex>
     </Flex>

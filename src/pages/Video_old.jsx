@@ -47,24 +47,13 @@ const Video = () => {
 
   let [isPlaying, setIsPlaying] = React.useState(false);
   let aspectRatioInit = {
-    'maxW': '1150px',
+    'maxW': '80vw',
     'maxH': '150px'
   }
   let aspectRatioChange = {
-    'maxW': '700px',
-    'maxH': '450px'
+    'maxW': '650px',
+    'maxH': '650px'
   }
-
-  // For radio
-  const [tabIndex, setTabIndex] = useState(0)
-
-  const options = ['Overall', 'Cross', 'Jab', 'Lead Hook', 'Rear Hook', 'Uppercut']
-  const { getRootProps, getRadioProps } = useRadioGroup({
-    name: 'framework',
-    defaultValue: 'Overall',
-    onChange: console.log,
-  })
-  const group = getRootProps()
 
   const handleClick = () => {
     if (!isPlaying) {
@@ -76,19 +65,41 @@ const Video = () => {
     }
   }
 
+  const handlePlay = () => {
+    console.log("HANDLE PLAYING")
+  }
+
+  // For radio
+  const [tabIndex, setTabIndex] = useState(0)
+
+  const options = ['Overall', 'Right Punch', 'Left Punch', 'Right Kick', 'Left Kick']
+  const { getRootProps, getRadioProps } = useRadioGroup({
+    name: 'framework',
+    defaultValue: 'Overall',
+    onChange: console.log,
+  })
+  const group = getRootProps()
+
   return (
     <>
-      <Center pt='20px' pb='20px'>
-        <Iframe
-          title={videoTitle}
-          src={videoSrc}
-          allowFullScreen
-          onInferredClick={handleClick}
-          width={isPlaying? aspectRatioChange.maxW : aspectRatioInit.maxW}
-          height={isPlaying? aspectRatioChange.maxH : aspectRatioInit.maxH}
-        />
+      <Center>
+        <AspectRatio 
+          maxWidth={isPlaying? aspectRatioChange.maxW : aspectRatioInit.maxW}
+          maxHeight={isPlaying? aspectRatioChange.maxH : aspectRatioInit.maxH}
+          mt='15px' mb='15px' flex="1 1 auto" 
+        >
+          <Iframe
+            title={videoTitle}
+            src={videoSrc}
+            allowFullScreen
+            onClick={handleClick}
+            onPlay={handlePlay}
+            onInferredClick={handleClick}
+          />
+
+        </AspectRatio>
       </Center>
-      <Tabs variant='enclosed' pl='10vw' pr='10vw' onChange={(index) => setTabIndex(index)} >
+      <Tabs variant='enclosed' pl='10vw' pr='10vw' onChange={(index) => setTabIndex(index)}>
         <TabList>
           <Tab>Summary</Tab>
           <Tab>Fighter 1</Tab>
