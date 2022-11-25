@@ -1,98 +1,86 @@
-import React, { useEffect, useState, ReactNode, useRef } from "react";
+import React, { useEffect, useState, PureComponent } from "react";
 import { useLocation } from "react-router-dom";
 import {
-  Center,
-  Flex,
+  Box,
   Heading,
-  HStack,
+  Flex,
   Text,
-  useRadioGroup,
-  VStack,
 } from "@chakra-ui/react";
-import MultiLine from "../components/visualisations/MultiLine";
-import Sidebar from "../components/sidebar/Sidebar";
-import RadioCard from "../components/radio/RadioCard";
-import SpeedData from "../dummy_data/speed.json";
-import PowerData from "../dummy_data/power.json";
-import AccuracyData from "../dummy_data/accuracy.json";
+import { 
+  PieChart, 
+  Pie, 
+  Sector, 
+  Cell, 
+  ResponsiveContainer,
+  Tooltip
+} from 'recharts';
+import MultiLine from '../components/visualisations/MultiLine.jsx';
+import Stamina from './training/Stamina.jsx';
+import TrendsBox from './trends/TrendsBox.jsx';
+import SpeedData from "../dummy_data/trends/speed.json";
+import PowerData from "../dummy_data/trends/power.json";
 
-const Trends = () => {
-    // Window size for graph size
-    const [windowSize, setWindowSize] = useState(getWindowSize());
-    function getWindowSize() {
-      const {innerWidth, innerHeight} = window;
-      return {innerWidth, innerHeight};
-    }
-    useEffect(() => {
-      function handleWindowResize() {
-        setWindowSize(getWindowSize());
-      }
-      window.addEventListener('resize', handleWindowResize);
-      return () => {
-        window.removeEventListener('resize', handleWindowResize);
-      };
-    }, []);
+const Improvements = () => {
 
-    // For radio
-    const [tabIndex, setTabIndex] = useState('Speed')
-    const options = ['Speed', 'Power', 'Accuracy']
-    const { getRootProps, getRadioProps } = useRadioGroup({
-      name: 'framework',
-      defaultValue: 'Speed',
-      onChange: setTabIndex,
-    })
-    const group = getRootProps()
+  let pb_options = ['Speed', 'Power', 'Stamina']
+  let pb_data = [SpeedData, PowerData, SpeedData]
+  let pb_xAxis_Titles = ['Date', 'Date', 'Date']
+  let pb_yAxis_Titles = ['Speed (kph)', 'Power (psi)', 'Stamina (punches per min)']
+  let sparring_options = ['Speed', 'Power', 'Technque', 'Stamina', 'Aggressiveness']
+  let sparring_data = [SpeedData, PowerData, SpeedData, PowerData, SpeedData]
+  let sparring_xAxis_Titles = ['Date', 'Date', 'Date', 'Date', 'Date']
+  let sparring_yAxis_Titles = ['Speed (kph)', 'Power (psi)', 'Technique', 'Stamina (punches per min)', 'Aggressiveness']
+  let fight_options = ['Speed', 'Power', 'Technque', 'Stamina', 'Aggressiveness']
+  let fight_data = [SpeedData, PowerData, SpeedData, PowerData, SpeedData]
+  let fight_xAxis_Titles = ['Date', 'Date', 'Date', 'Date', 'Date']
+  let fight_yAxis_Titles = ['Speed (kph)', 'Power (psi)', 'Technique', 'Stamina (punches per min)', 'Aggressiveness']
   
   return (
-
-      <Flex pt='5vh'>
-        <VStack pt='10px'>
-          <HStack alignItems='top'>
-            <VStack {...group} pl='2vw' pr='50px' pt='70px'>
-              {options.map((value) => {
-                const radio = getRadioProps({ value })
-                return (
-                  <RadioCard key={value} p={'6px'} width={'240px'} {...radio}>
-                    <Center>
-                    {value}
-                    </Center>
-                  </RadioCard>
-                )
-              })}
-            </VStack>
-            {tabIndex==='Speed' && 
-            <MultiLine 
-              data={SpeedData} 
-              height={0.78*windowSize.innerHeight} 
-              width={0.72*windowSize.innerWidth} 
-              min={15}
-              yAxisTitle={'Speed (kph)'}
-            />
-            }
-            {tabIndex==='Power' &&
-            <MultiLine 
-              data={PowerData} 
-              height={0.78*windowSize.innerHeight} 
-              width={0.72*windowSize.innerWidth} 
-              min={500}
-              yAxisTitle={'Power (psi)'}
-            />
-            }
-            {tabIndex==='Accuracy' &&
-            <MultiLine 
-              data={AccuracyData} 
-              height={0.78*windowSize.innerHeight} 
-              width={0.72*windowSize.innerWidth} 
-              min={15}
-              yAxisTitle={'Accuracy (%)'}
-            />
-            }
-          </HStack>
-        </VStack>
-      </Flex>
-
-
+    <>
+      <Box
+        mt='20px' mb='20px' ml='2vw' mr='2vw' 
+        p='20px'
+        pt='10px'
+        borderWidth='1px' borderRadius='lg' overflow='hidden' 
+      >
+        <Text fontSize='2xl' pb='0px'>Punching Bag</Text>
+        <TrendsBox 
+          options={pb_options}
+          data={pb_data}
+          xAxisTitles={pb_xAxis_Titles}
+          yAxisTitles={pb_yAxis_Titles}
+        />
+      </Box>
+      <Box
+        mt='20px' mb='20px' ml='2vw' mr='2vw' 
+        p='20px'
+        pt='10px'
+        borderWidth='1px' borderRadius='lg' overflow='hidden' 
+      >
+        <Text fontSize='2xl' pb='0px'>Sparring</Text>
+        <TrendsBox 
+          options={sparring_options}
+          data={sparring_data}
+          xAxisTitles={sparring_xAxis_Titles}
+          yAxisTitles={sparring_yAxis_Titles}
+        />
+      </Box>
+      <Box
+        mt='20px' mb='40px' ml='2vw' mr='2vw' 
+        p='20px'
+        pt='10px'
+        borderWidth='1px' borderRadius='lg' overflow='hidden' 
+      >
+        <Text fontSize='2xl' pb='0px'>Fight</Text>
+        <TrendsBox 
+          options={fight_options}
+          data={fight_data}
+          xAxisTitles={fight_xAxis_Titles}
+          yAxisTitles={fight_yAxis_Titles}
+        />
+      </Box>
+    </>
   );
 };
 
-export default Trends;
+export default Improvements;

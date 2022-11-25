@@ -2,64 +2,51 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+} from '@chakra-ui/react';
 import { CheckCircleIcon, WarningTwoIcon } from '@chakra-ui/icons'
 import {
-  List,
-  ListItem,
-  ListIcon,
-  OrderedList,
-  UnorderedList,
-  StackDivider,
-  AspectRatio,
-  Center,
-  Divider,
-  Flex,
-  Grid,
-  Heading,
-  HStack,
-  Image,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  Radio,
-  RadioGroup,
-  Spacer,
-  Stack,
-  Stat,
-  StatLabel,
-  StatNumber,
-  StatHelpText,
-  StatArrow,
-  StatGroup,
-  Text,
-  useRadioGroup,
-  VStack,
-  Badge,
   Box,
-  Avatar
+  Center,
+  HStack,
+  Text,
 } from "@chakra-ui/react";
 import Iframe from 'react-iframe-click';
-import HumanBody from "../components/humanbody/HumanBody";
-import RadioCard from "../components/radio/RadioCard";
-import RingProgress from "../components/visualisations/RingProgress"
+import UploadVideoModal from './fight/UploadVideoModal.jsx';
+import ChooseFightMenu from './fight/ChooseFightMenu.jsx';
+import Stamina from './training/Stamina.jsx';
+import Analysis from './training/Analysis.jsx';
+import TrainingStatBox from './training/TrainingStatBox.jsx';
 
 const Training = () => {
 
+  // Data 
+  const summary = {
+    'time': '2',
+    'stamina': '55',
+    'strikes': '45',
+    'sigstrikes': '22',
+    'jabs': '12',
+    'hooks': '8',
+    'uppercuts': '7',
+  }
+
   let videoTitle = 'Video Title'
-  let videoDate = 'Date'
-  let videoDescription = 'This is the video description'
-  let videoLength = '1:45'
   let videoSrc = "https://www.youtube.com/embed/sLTvQnjEkRU"
 
   let [isPlaying, setIsPlaying] = React.useState(false);
   let aspectRatioInit = {
-    'maxW': '80vw',
+    'maxW': '1150px',
     'maxH': '150px'
   }
   let aspectRatioChange = {
-    'maxW': '650px',
-    'maxH': '650px'
+    'maxW': '700px',
+    'maxH': '450px'
   }
 
   const handleClick = () => {
@@ -72,125 +59,52 @@ const Training = () => {
     }
   }
 
-  const handlePlay = () => {
-    console.log("HANDLE PLAYING")
-  }
-
-  // For radio
-  const [tabIndex, setTabIndex] = useState(0)
-
-  const options = ['Overall', 'Right Punch', 'Left Punch', 'Right Kick', 'Left Kick']
-  const { getRootProps, getRadioProps } = useRadioGroup({
-    name: 'framework',
-    defaultValue: 'Overall',
-    onChange: console.log,
-  })
-  const group = getRootProps()
-
   return (
     <>
-      <Center>
-        <AspectRatio 
-          maxWidth={isPlaying? aspectRatioChange.maxW : aspectRatioInit.maxW}
-          maxHeight={isPlaying? aspectRatioChange.maxH : aspectRatioInit.maxH}
-          mt='15px' mb='15px' flex="1 1 auto" 
-        >
-          <Iframe
-            title={videoTitle}
-            src={videoSrc}
-            allowFullScreen
-            onClick={handleClick}
-            onPlay={handlePlay}
-            onInferredClick={handleClick}
-          />
-
-        </AspectRatio>
+      <HStack pt='20px' pl='11vw'>
+        <ChooseFightMenu button_text={'Choose Training Session'} />
+        <UploadVideoModal button_text={'Upload Training Session'} />
+      </HStack>
+      <Center pt='20px' pb='20px'>
+        <Iframe
+          title={videoTitle}
+          src={videoSrc}
+          allowFullScreen
+          onInferredClick={handleClick}
+          width={isPlaying? aspectRatioChange.maxW : aspectRatioInit.maxW}
+          height={isPlaying? aspectRatioChange.maxH : aspectRatioInit.maxH}
+        />
       </Center>
 
-      <Center>
-      <VStack width={1100}>
-      <Flex>
-        <Avatar src='https://bit.ly/sage-adebayo' />
-        <Box ml='3'>
-          <Text fontWeight='bold'>
-            User's name
-            <Badge ml='1' colorScheme='green'>
-              New
-            </Badge>
-          </Text>
-          <Text fontSize='sm'>Bio</Text>
-        </Box>
-      </Flex>
-      <Stack divider={<StackDivider />} spacing='4'>
-            <Box>
-              <Heading size='l' textTransform='uppercase'>
-                Summary
-              </Heading>
-              <List spacing={3}>
-                <ListItem>
-                  <ListIcon as={CheckCircleIcon} color='green.500' />
-                  Speed was successfully analysed.
-                </ListItem>
-                <ListItem>
-                  <ListIcon as={CheckCircleIcon} color='green.500' />
-                  Rhythm was successfully analysed.
-                </ListItem>
-                <ListItem>
-                  <ListIcon as={CheckCircleIcon} color='green.500' />
-                  Power was successfully analysed.
-                </ListItem>
-                {/* You can also use custom icons from react-icons */}
-                <ListItem>
-                  <ListIcon as={WarningTwoIcon} color='red.500' />
-                  Can't define any defense style.
-                </ListItem>
-              </List>
-            </Box>
-            <Box>
-              <Heading size='l' textTransform='uppercase'>
-                Overview
-              </Heading>
-              <Text pt='2' fontSize='sm'>
-              This is an overview of the report / data. text here xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-              </Text>
-            </Box>
-            <Box>
-              <Heading size='l' textTransform='uppercase'>
-                Analysis
-              </Heading>
-              <StatGroup pt='50px'>
-              <Stat>
-                <StatLabel>Speed</StatLabel>
-                <StatNumber>45</StatNumber>
-                miles/hour
-                <StatHelpText>
-                  <StatArrow type='increase' />
-                  23.36%
-                </StatHelpText>
-              </Stat>
-              <Stat>
-                <StatLabel>Rhythm</StatLabel>
-                <StatNumber>3</StatNumber>
-                punches/s
-                <StatHelpText>
-                  <StatArrow type='decrease' />
-                  19.05%
-                </StatHelpText>
-              </Stat>
-              <Stat>
-                <StatLabel>Power</StatLabel>
-                <StatNumber>2500</StatNumber>
-                N
-                <StatHelpText>
-                  <StatArrow type='increase' />
-                  30.00%
-                </StatHelpText>
-              </Stat>
-            </StatGroup>
-            </Box>
-          </Stack>
-      </VStack>
-      </Center>
+      <Box
+        mt='0px' ml='10vw' mr='10vw' 
+        p='20px'
+        pt='10px'
+        borderWidth='1px' borderRadius='lg' overflow='hidden' 
+      >
+        <Text fontSize='2xl'>Summary</Text>
+        <TrainingStatBox data={summary} />
+      </Box>
+
+      <Box
+        mt='20px' ml='10vw' mr='10vw' 
+        p='20px'
+        pt='10px'
+        borderWidth='1px' borderRadius='lg' overflow='hidden' 
+      >
+        <Text fontSize='2xl' pb='10px'>Analysis</Text>
+        <Analysis />
+      </Box>
+
+      <Box
+        mt='20px' mb='40px' ml='10vw' mr='10vw' 
+        p='20px'
+        pt='10px'
+        borderWidth='1px' borderRadius='lg' overflow='hidden' 
+      >
+        <Text fontSize='2xl' pb='10px'>Stamina</Text>
+        <Stamina />
+      </Box>
     </>
   );
 };
