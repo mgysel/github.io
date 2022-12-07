@@ -1,25 +1,31 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
-import Profile from "./Profile";
-import Training from "./Training.jsx";
-import Fight from "./Fight.jsx";
-import BrowseVideo from "../components/video/BrowseVideo";
-import Trends from "./Trends.jsx"
+
+import StartGame from "./StartGame";
+import Difficulty from "./Difficulty";
+import Game from "./Game";
+import DragDrop from "./DragDrop";
+import ReviewCards from "./ReviewCards";
+import ChooseCharacters from "./ChooseCharacters";
 
 const Navigation = () => {
+
   return (
     <Switch>
       <Route exact path="/">
-        <Profile />
+        <StartGame />
       </Route>
-      <Route exact path="/fights">
-        <Fight />
+      <Route exact path="/difficulty">
+        <Difficulty />
       </Route>
-      <Route exact path="/training">
-        <Training />
+      <Route exact path="/characters">
+        <ChooseCharacters />
       </Route>
-      <Route exact path="/trends">
-        <Trends />
+      <Route exact path="/review">
+        <ReviewCards />
+      </Route>
+      <Route exact path="/game">
+        <Game />
       </Route>
     </Switch>
   );

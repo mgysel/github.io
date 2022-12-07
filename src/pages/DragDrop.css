@@ -1,0 +1,16 @@
+
+
+.column {
+  height: 350px;
+  width: 45vw;
+  padding: 10px;
+}
+
+.column-container {
+  height: 350px;
+  width: 45vw;
+  border-radius: 10px;
+  box-shadow: 1px 1px 6px rgba(0,0,0,0.5);
+  display: flex;
+  padding: 10px;
+}
