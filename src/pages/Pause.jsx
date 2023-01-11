@@ -42,7 +42,7 @@ const Pause = () => {
           context.round[0] < 5 ?
           <Button
             width='160px' height='60px'
-            backgroundColor='teal' color='white'
+            backgroundColor='#7CB9E8' color='black'
             aria-label='Go to next page'
           >
             Next Round 

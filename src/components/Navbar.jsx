@@ -46,21 +46,6 @@ const Navbar = ({ children, ...rest }) => {
 
   let history = useHistory();
 
-  //Update global 
-  const handleStartClick = () => {
-    console.log("NAVBAR HANDLING CLICK");
-    setCC('');
-    setDifficulty('');
-    context.cc[0] = '';
-    context.difficulty[0] = '';
-    context.cc[1]('');
-    context.difficulty[1]('');
-    context.gameMode[1](0);
-    console.log(context.cc);
-    console.log(context.difficulty);
-    history.push("/");
-  }
-
   // Timer
   // Renderer callback with condition
   const renderer = ({ hours, minutes, seconds, completed }) => {
