@@ -1,16 +1,16 @@
 
 
 .column {
-  height: 350px;
-  width: 45vw;
-  padding: 10px;
+  height: 300px;
+  width: 22vw;
+  padding: 15px;
 }
 
 .column-container {
-  height: 350px;
-  width: 45vw;
+  height: 300px;
+  width: 22vw;
+  border: 1px solid rgb(162, 159, 159);
   border-radius: 10px;
-  box-shadow: 1px 1px 6px rgba(0,0,0,0.5);
   display: flex;
   padding: 10px;
 }

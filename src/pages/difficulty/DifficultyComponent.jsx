@@ -32,28 +32,19 @@ const DifficultyComponent = (props) => {
     setBorder('7px solid black');
   }
 
-  // Fetch items on mount
-  useEffect(() => {
-    if (context.difficulty[0]===props.title) {
-      setBgColor(props.clickColor);
-      setBorder('7px solid black');
-    } else {
-      setBgColor(props.color);
-      setBorder('3px solid black')
-    }
-  }, [context.difficulty, props.title, props.color, props.clickColor]);
-
   return (
-    <VStack borderRadius='lg' bg={bgColor} padding='10px' border={border} h='190px' w='250px'
+    <VStack borderRadius='lg' bg={bgColor} padding='10px' border={border} h='220px' w='300px'
       onClick={handleClick}
       _hover={{ 
         bg: props.clickColor,
         cursor: 'pointer' 
       }}
     >
-      <Text fontSize='2xl' fontWeight='bold' pb='5px'>{props.title}</Text>
-      <Image src={props.src} height='80px' />
-      <Text >{props.numQuestions} questions</Text>
+      <Text fontSize='2xl' fontWeight='bold' pb='10px'>{props.title}</Text>
+      <Box mb='30px'>
+        <Image src={props.src} height='90px' />
+      </Box>
+      <Text pt='10px'>{props.numQuestions} questions</Text>
     </VStack>
   );
 };

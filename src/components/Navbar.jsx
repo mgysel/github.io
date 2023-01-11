@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import {
   Button,
+  Center,
   Drawer,
   DrawerBody,
   DrawerFooter,
@@ -33,11 +34,12 @@ import Timer from './Timer'
 const Navbar = ({ children, ...rest }) => {
 
   const context = useContext(StoreContext);
-  // const [cc, setCC] = React.useState(context.cc);
-  // const [difficulty, setDifficulty] = React.useState(context.difficulty);
   let [cc, setCC] = React.useState(context.cc);
   let [difficulty, setDifficulty] = React.useState(context.difficulty);
   let [gameMode, setGameMode] = React.useState(context.gameMode);
+
+  // Score
+  const score = context.score;
   
   const btnRef = React.useRef()
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -58,41 +60,70 @@ const Navbar = ({ children, ...rest }) => {
     console.log(context.difficulty);
     history.push("/");
   }
-  // Set global CC (context or character)
 
   // Timer
   // Renderer callback with condition
   const renderer = ({ hours, minutes, seconds, completed }) => {
+    // Format minutes, seconds
+    var mDisplay = minutes > 0 ? (minutes < 10 ? "" : "") + minutes + ":" : "0:";
+    var sDisplay = seconds > 0 ? (seconds < 10 ? "0" : "") + seconds : "00";
+    
     // Render a countdown
-    return <Text fontSize='25px'>{minutes}:{seconds}</Text>;
+    return <Text fontSize='25px'>Time: {mDisplay}{sDisplay}</Text>;
   };
 
   // Styling
   const p='10px';
 
-  // {
-  //  <Text p={p} fontSize='2xl' as={RouterLink} to={"/difficulty"}>
-  //   Difficulty
-  // </Text>
-  // <Text p={p} fontSize='2xl' as={RouterLink} to={"/characters"}>
-  // Characters
-  // </Text>
-  // <Text p={p} fontSize='2xl'  as={RouterLink} to={"/review"}>
-  //   Review
-  // </Text>
-  // <Text p={p} fontSize='2xl'  as={RouterLink} to={"/game"}>
-  //   Game
-  // </Text>
-  // }
+  const [k, setK] = useState(false);
+  const onCompleteTimeFun = () => {
+    console.log("Resetting Time");
+    console.log("CONTEXT GAME MODE")
+    console.log(context.gameMode[0])
+    setK((i) => !i);
+
+    // Update game round
+    context.round[1](context.round[0] + 1)
+    if (context.gameMode[0] === 1) {
+      context.gameMode[1](2)
+    } 
+
+    // Navigate to /pause
+    history.push('/pause')
+
+    // Reset for game cards shown
+    context.numCards[1](0)
+  };
 
   return (
     <Flex h="3.5rem" justifyContent="center" bg="gray.700" color="white">
       {context.gameMode[0]===1 &&
-        <Flex ml='20px' mt='8px' width='200px' height='20px'>
-          <Countdown
-            date={Date.now() + 180*1000}
-            renderer={renderer}
-          />
+        <Flex position='absolute' 
+          ml='40px' mt='8px' 
+          width='100%' height='40px' 
+        >
+          <Center border='1px solid white' borderRadius='5px' padding='10px' width='155px'>
+            <Countdown
+              date={Date.now() + 180*1000}
+              renderer={renderer}
+              onComplete={onCompleteTimeFun}
+              key={k}
+            />
+          </Center>
+          <Center 
+            border='1px solid white' borderRadius='5px' 
+            fontSize='25px' padding='10px' width='140px'
+            ml='20px'
+          >
+            Score: {context.score[0]}
+          </Center>
+          <Center 
+            border='1px solid white' borderRadius='5px' 
+            fontSize='25px' padding='10px' width='160px'
+            ml='20px'
+          >
+            Round: {context.round[0]}/4
+          </Center>
         </Flex>
       }
       <Flex
@@ -101,17 +132,13 @@ const Navbar = ({ children, ...rest }) => {
         h="100%"
         alignItems="center"
         px="1rem"
-        justifyContent="right"
         p='5px'
+        ml = 'calc(100% - 230px)'
       >
-        <Text p={p} fontSize='2xl' onClick={handleStartClick} _hover={{ 
-          cursor: 'pointer' 
-        }}>
-          Start
-        </Text>
-        <Button ref={btnRef} colorScheme="teal" onClick={onOpen} >
+        <Button ref={btnRef} backgroundColor='#7CB9E8' onClick={onOpen} >
           <Text 
             p={p} fontSize='2xl' 
+            color='black'
             _hover={{ 
               cursor: 'pointer' 
             }}
@@ -136,9 +163,9 @@ const Navbar = ({ children, ...rest }) => {
             <DrawerHeader>Review Criteria Cards</DrawerHeader>
             <DrawerBody>
               <Grid templateColumns='repeat(5, 1fr)' gap={6}>
-                {context.cards.map((image, index) => (
+                {context.criteria.map((image, index) => (
                   <WrapItem key={index}>
-                    <Image src={`images/cards/${image}`} index={index} />
+                    <Image src={`images/criteria/${image}`} index={index} />
                   </WrapItem>
                 ))}
               </Grid>

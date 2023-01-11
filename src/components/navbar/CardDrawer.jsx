@@ -35,7 +35,7 @@ import { StoreContext } from "../../helpers/context";
 
 const CardDrawer = () => {
   const context = useContext(StoreContext);
-  const criteriaCards = context.cards;
+  const criteriaCards = context.criteria;
   console.log(criteriaCards);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -50,7 +50,7 @@ const CardDrawer = () => {
             <Grid templateColumns='repeat(5, 1fr)' gap={6}>
               {criteriaCards.map((image, index) => (
                 <WrapItem key={index}>
-                  <Image src={`images/cards/${image}`} index={index} />
+                  <Image src={`images/criteria/${image}`} index={index} />
                 </WrapItem>
               ))}
             </Grid>

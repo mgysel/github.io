@@ -17,7 +17,9 @@ import {
 } from "@chakra-ui/react";
 import DifficultyComponent from "./difficulty/DifficultyComponent";
 import { StoreContext } from "../helpers/context";
-import CCSelect from "./difficulty/CCSelect.jsx";
+import BackButton from "../components/BackButton";
+import ForwardButton from "../components/ForwardButton";
+import { ArrowForwardIcon } from '@chakra-ui/icons';
 
 const Difficulty = () => {
   const context = useContext(StoreContext);
@@ -84,35 +86,38 @@ const Difficulty = () => {
     } 
   }, [context.cc, context.difficulty, history, cc, difficulty]);
 
-  // useEffect(() => {
-  //   setCC('')
-  //   setDifficulty('')
-  // }, [])
-
   return (
     <>
+      <Flex position='absolute' top='75px' left='40px' as={RouterLink} to='/prep2'>
+        <BackButton />
+      </Flex>
+      <Flex position='absolute' top='75px' right='40px' as={RouterLink} to='/game'>
+        <Button
+          width='160px' height='60px'
+          backgroundColor='#7CB9E8' color='black'
+          aria-label='Go to next page'
+        >
+          Start Game 
+          <ArrowForwardIcon pl='4px' size='xl' />
+        </Button>
+      </Flex>
       <VStack>
-        <Heading pt='30px' pb='10px'>Play with Criteria or Character Cards?</Heading>
-        <Grid templateColumns='repeat(2, 1fr)' gap={10}>
-          <CCSelect image={`images/characters/${contextCards[0]}`} type='Criteria' color={CCColors[1]} clickColor={CCClickColors[0]} cc={cc} setCC={setCC}/>
-          <CCSelect image={`images/characters/${characterCards[0]}`} type='Character' color={CCColors[1]} clickColor={CCClickColors[0]} cc={cc} setCC={setCC}/>
-        </Grid>
-      </VStack>
-      <VStack>
-        <Heading pt='40px' pb='15px'>Choose level of difficulty</Heading>
-        <HStack>
-          {difficultyImages.map((p, i) => (
-            <DifficultyComponent 
-              title={difficultyText[i]} 
-              src={difficultyImages[i]} 
-              color={difficultyColors[i]} 
-              clickColor={difficultyClickColors[i]}
-              numQuestions={difficultyQuestions[i]} 
-              key={i}
-              difficulty={difficulty}
-              setDifficulty={setDifficulty}
-              />
-          ))}  
+        <Heading pt='28px' pb='15px'>Choose level of difficulty</Heading>
+        <HStack pt='40px'>
+          <Grid templateColumns='repeat(2, 2fr)' gap={10}>
+            {difficultyImages.map((p, i) => (
+              <DifficultyComponent 
+                title={difficultyText[i]} 
+                src={difficultyImages[i]} 
+                color={difficultyColors[i]} 
+                clickColor={difficultyClickColors[i]}
+                numQuestions={difficultyQuestions[i]} 
+                key={i}
+                difficulty={difficulty}
+                setDifficulty={setDifficulty}
+                />
+            ))}  
+          </Grid>
         </HStack>
       </VStack>
     </>

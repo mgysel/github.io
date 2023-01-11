@@ -2,18 +2,18 @@ import React, { useState, useContext, useEffect, useRef } from "react";
 import {
   IconButton,
 } from "@chakra-ui/react";
-import { ArrowBackIcon } from '@chakra-ui/icons';
+import { ArrowForwardIcon } from '@chakra-ui/icons';
 
-const BackButton = (props) => {
+const ForwardButton = (props) => {
 
   return (
     <IconButton
       width='100px' height='60px'
       backgroundColor='#7CB9E8' color='black'
-      aria-label='Search database'
-      icon={<ArrowBackIcon />}
+      aria-label='Go to next page'
+      icon={<ArrowForwardIcon />}
     />
   );
 };
 
-export default BackButton;
+export default ForwardButton;
