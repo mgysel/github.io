@@ -249,6 +249,21 @@ function StoreProvider({ children }) {
       '29.png',
       '30.png'
     ],
+
+    criteriaDescriptions: [
+      'According to Pew Research Center, over 90% of Americans use the internet, suggesting it is a widespread, basic need.',
+      'Access to the internet is a basic need because we use it in our daily lives in essential ways, including for communication, education, and commerce.',
+      "Let’s discuss how each of us use the internet in our daily life, which might help us answer whether having access to the internet is a basic need.",
+      "Internet usage varies between countries and between individuals, so the internet might not be a basic need for everyone. For example, carpenters might not consider the internet a basic need if they have no use for the internet in their job.",
+      "Basic need can be defined as the minimum resources necessary for long-term physical well-being, usually in reference to consumption goods.",
+      "I previously argued that the internet is a basic need because we use it in our daily lives in essential ways. But this argument is only valid in similar parts of the world where the internet is so widely used.",
+      "Food, water, and shelter are basic needs whereas access to the internet is not. Without food, water, and shelter, our physical well-being is immediately at risk. Without access to the internet, we are inconvenienced, but still safe.",
+      "A basic need was defined as the minimum resources necessary for long-term physical well-being, usually in reference to consumption goods. In other words, a basic need is something we can’t live without.",
+      "The question implies that the internet is a basic need or is not a basic need, not allowing for any additional alternatives.",
+      "Access to the internet is a basic need because it is used in many peoples’ daily lives. For example, I use the internet every day to communicate with my family and friends.",
+      "While access to the internet is a basic need in many peoples’ daily lives, many rarely use the internet. As a counterexample, my family and I communicate in person each day, eliminating our need to communicate over the internet.",
+      "Having access to the internet might be a basic need for some and not for others. Thus, this question might not have one answer, but many separate answers depending on who you ask."
+    ]
   };
 
   return (

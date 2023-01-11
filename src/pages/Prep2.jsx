@@ -63,7 +63,7 @@ const Prep2 = () => {
         <VStack>
           <HStack>
             <Box pr='10px'>
-              <Image src={`images/questions/${questions[0]}`} width='250px' />
+              <Image src={`images/questions/${questions[9]}`} width='250px' />
             </Box>
             <Box width='400px' pl='20px'>
               <Text as="span">Passage of text where </Text>
