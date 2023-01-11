@@ -19,7 +19,7 @@ import ForwardButton from "../components/ForwardButton";
 
 const Prep2 = () => {
   const context = useContext(StoreContext);
-  const criteriaCards = context.cards;
+  const criteriaCards = context.criteria;
   const questions = context.questions;
   
   const [hover, setHover] = React.useState(false);
@@ -36,7 +36,32 @@ const Prep2 = () => {
 
   const mouseOver = () => {
     console.log("MOUSE OVER")
+    setCard(0)
 
+    setHover(true);
+    setDisplay('block');
+  }
+  const mouseOver1 = () => {
+    console.log("MOUSE OVER")
+    setCard(4)
+    setHover(true);
+    setDisplay('block');
+  }
+  const mouseOver2 = () => {
+    console.log("MOUSE OVER")
+    setCard(7)
+    setHover(true);
+    setDisplay('block');
+  }
+  const mouseOver3 = () => {
+    console.log("MOUSE OVER")
+    setCard(1)
+    setHover(true);
+    setDisplay('block');
+  }
+  const mouseOver4 = () => {
+    console.log("MOUSE OVER")
+    setCard(2)
     setHover(true);
     setDisplay('block');
   }
@@ -66,27 +91,47 @@ const Prep2 = () => {
               <Image src={`images/questions/${questions[9]}`} width='250px' />
             </Box>
             <Box width='400px' pl='20px'>
-              <Text as="span">Passage of text where </Text>
+              <Text as="span">Basic need can be</Text>
               <Text as="span" backgroundColor='orange.100' _hover={{ cursor: 'pointer' }} px='1'
-                onMouseOver={mouseOver}
+                onMouseOver={mouseOver1}
                 onMouseOut={mouseOut}
-                >components are highlighted</Text>
-              <Text as="span"> and the corresponding criteria card pops up. Passage of text where components are highlighted and the corresponding </Text>
+                >
+                defined as
+              </Text>
+              <Text as="span">the minimum resources necessary for long-term physical well-being, usually in reference to consumption goods.</Text>
               <Text as="span" backgroundColor='orange.100' _hover={{ cursor: 'pointer' }} px='1'
-                onMouseOver={mouseOver}
+                onMouseOver={mouseOver2}
                 onMouseOut={mouseOut}
-              >criteria card pops up.</Text> 
-              <Text as="span"> Passage of text where components are highlighted and the corresponding </Text>
+              >
+                In other words,
+              </Text>
+              <Text as="span">
+                a basic need is something we cannot live without.
+              </Text>
+              <Text as="span">
+                While access to the internet is important in many people’s daily life,
+              </Text> 
               <Text as="span" backgroundColor='orange.100' _hover={{ cursor: 'pointer' }} px='1'
-                onMouseOver={mouseOver}
+                onMouseOver={mouseOver3}
                 onMouseOut={mouseOut}
-              >criteria card pops up.</Text>
-              <Text as="span"> Passage of text where components are highlighted and the corresponding criteria card pops up.</Text>
+              >
+                it is not necessary for our long-term well-being
+              </Text>
+              <Text as="span">.</Text>
+              <Text as="span" backgroundColor='orange.100' _hover={{ cursor: 'pointer' }} px='1'
+                onMouseOver={mouseOver4}
+                onMouseOut={mouseOut}
+              >
+                Let’s discuss
+              </Text>
+              <Text as="span">
+              how we use the internet in our daily life, which might help us answer whether having access to the internet is a basic need.
+              </Text>  
             </Box>
           </HStack>
-          <Box pt='20px' display={display}>
+          <Box pt='20px' display={display} width='240px'>
             <Image 
-              src={`images/cards/${criteriaCards[card]}`} 
+              src={`images/criteria/${criteriaCards[card]}`} 
             />
           </Box>
         </VStack>

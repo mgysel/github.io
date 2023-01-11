@@ -81,7 +81,7 @@ const Prep1 = () => {
           <ForwardButton />
         </Flex>
       </Center>
-      <Center mt='20px' mb='30px'>
+      <Center mt='10px' mb='20px'>
         <HStack>
           <Box pr='10px'>
             <Image src={`images/questions/${questions[9]}`} width='250px' />
@@ -103,7 +103,7 @@ const Prep1 = () => {
           {criteriaCards.map((image, index) => (
             <Carousel.Item key={index}>
               <Center>
-                <Image src={`images/criteria/${image}`} index={index} width='250px' />
+                <Image src={`images/criteria/${image}`} index={index} width='240px' />
               </Center>
             </Carousel.Item>
           ))}
